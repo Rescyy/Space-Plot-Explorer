@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cj6diom0xf8ik"]
 
-[ext_resource type="Texture2D" uid="uid://cdhwvbo7lnip3" path="res://spaceship.png" id="1_cqsuh"]
+[ext_resource type="Texture2D" uid="uid://cdhwvbo7lnip3" path="res://Spaceship/spaceship.png" id="1_cqsuh"]
 
 [sub_resource type="GDScript" id="GDScript_brfhu"]
 script/source = "extends CollisionPolygon2D
