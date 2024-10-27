@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://cj6diom0xf8ik"]
+
+[ext_resource type="Texture2D" uid="uid://cdhwvbo7lnip3" path="res://rocket.png" id="1_cqsuh"]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+position = Vector2(5.96046e-08, 2.38419e-07)
+scale = Vector2(0.996868, 0.993734)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-5.97919e-08, -2.39922e-07)
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("1_cqsuh")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(1.00314, -28.1766, 8.02513, -21.1324, 12.0377, -13.082, 13.0408, -4.02522, 21.066, 5.03153, 23.0723, 9.05675, 23.0723, 24.1513, 21.066, 25.1576, 20.0628, 25.1576, 11.0346, 16.1009, -10.0314, 16.1009, -20.0628, 25.1576, -21.066, 25.1576, -23.0723, 24.1513, -23.0723, 9.05675, -21.066, 5.03153, -13.0408, -4.02522, -12.0377, -13.082, -8.02513, -21.1324, -1.00314, -28.1766)
