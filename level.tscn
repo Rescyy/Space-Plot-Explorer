@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bgec2lm84272j"]
+[gd_scene load_steps=5 format=3 uid="uid://bgec2lm84272j"]
 
 [ext_resource type="Texture2D" uid="uid://117c7bcmbr1v" path="res://level_test.png" id="1_xfbpl"]
 [ext_resource type="PackedScene" uid="uid://cj6diom0xf8ik" path="res://rocket_scene.tscn" id="2_3ina5"]
+[ext_resource type="Script" path="res://Input/Input.gd" id="2_mff7c"]
 [ext_resource type="Script" path="res://rocket_scene.gd" id="3_ywuom"]
 
 [node name="Node2D" type="Node2D"]
@@ -9,7 +10,23 @@
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
+scale = Vector2(1.0005, 1.00088)
 texture = ExtResource("1_xfbpl")
+
+[node name="InputContainer" type="VBoxContainer" parent="TextureRect"]
+z_index = 6
+layout_mode = 0
+offset_left = 799.598
+offset_top = 575.494
+offset_right = 866.598
+offset_bottom = 615.494
+scale = Vector2(4.34644, 1.69344)
+
+[node name="FunctionInput" type="LineEdit" parent="TextureRect/InputContainer"]
+z_index = 6
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("2_mff7c")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_3ina5")]
 position = Vector2(140, 430)
@@ -17,6 +34,7 @@ slide_on_ceiling = false
 script = ExtResource("3_ywuom")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+scale = Vector2(1.16619, 1.01497)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 physics_interpolation_mode = 1
@@ -24,3 +42,6 @@ position = Vector2(159.095, 44.0454)
 scale = Vector2(0.80424, 0.911864)
 build_mode = 1
 polygon = PackedVector2Array(131.684, 308.11, 344.307, 217.088, 519.628, 134.839, 707.382, 77.8127, 922.492, 48.203, 990.88, 154.579, 949.847, 262.051, 753.388, 319.077, 534.548, 369.523, 402.747, 448.482, 272.189, 472.608, 104.329, 529.635, -58.5578, 504.411, -119.485, 449.579, -119.485, 385.973, -31.2028, 336.623)
+
+[connection signal="text_changed" from="TextureRect/InputContainer/FunctionInput" to="TextureRect/InputContainer/FunctionInput" method="_on_text_changed"]
+[connection signal="text_submitted" from="TextureRect/InputContainer/FunctionInput" to="TextureRect/InputContainer/FunctionInput" method="_on_text_submitted"]
