@@ -1,6 +1,20 @@
-[gd_scene load_steps=2 format=3 uid="uid://cj6diom0xf8ik"]
+[gd_scene load_steps=3 format=3 uid="uid://cj6diom0xf8ik"]
 
 [ext_resource type="Texture2D" uid="uid://cdhwvbo7lnip3" path="res://rocket.png" id="1_cqsuh"]
+
+[sub_resource type="GDScript" id="GDScript_brfhu"]
+script/source = "extends CollisionPolygon2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
 
 [node name="CharacterBody2D" type="CharacterBody2D"]
 position = Vector2(5.96046e-08, 2.38419e-07)
@@ -13,4 +27,6 @@ texture = ExtResource("1_cqsuh")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 visible = false
+scale = Vector2(1, 1)
 polygon = PackedVector2Array(1.00314, -28.1766, 8.02513, -21.1324, 12.0377, -13.082, 13.0408, -4.02522, 21.066, 5.03153, 23.0723, 9.05675, 23.0723, 24.1513, 21.066, 25.1576, 20.0628, 25.1576, 11.0346, 16.1009, -10.0314, 16.1009, -20.0628, 25.1576, -21.066, 25.1576, -23.0723, 24.1513, -23.0723, 9.05675, -21.066, 5.03153, -13.0408, -4.02522, -12.0377, -13.082, -8.02513, -21.1324, -1.00314, -28.1766)
+script = SubResource("GDScript_brfhu")
