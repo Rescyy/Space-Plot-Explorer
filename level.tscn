@@ -4,40 +4,29 @@
 [ext_resource type="Texture2D" uid="uid://117c7bcmbr1v" path="res://level_test.png" id="1_xfbpl"]
 [ext_resource type="PackedScene" uid="uid://cj6diom0xf8ik" path="res://rocket.tscn" id="2_3ina5"]
 [ext_resource type="Script" path="res://rocket.gd" id="3_ywuom"]
-
-[sub_resource type="GDScript" id="GDScript_q0knx"]
-script/source = "extends CollisionPolygon2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-"
+[ext_resource type="PackedScene" uid="uid://cdd8wf3nxikf4" path="res://destination.tscn" id="5_786ap"]
 
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_ladwk")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("1_xfbpl")
+[node name="LevelBounds" type="StaticBody2D" parent="."]
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("2_3ina5")]
-position = Vector2(140, 430)
-slide_on_ceiling = false
-script = ExtResource("3_ywuom")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LevelBounds"]
 physics_interpolation_mode = 1
 position = Vector2(159.095, 44.0454)
 scale = Vector2(0.80424, 0.911864)
 build_mode = 1
 polygon = PackedVector2Array(131.684, 308.11, 344.307, 217.088, 519.628, 134.839, 707.382, 77.8127, 922.492, 48.203, 990.88, 154.579, 949.847, 262.051, 753.388, 319.077, 534.548, 369.523, 402.747, 448.482, 272.189, 472.608, 104.329, 529.635, -58.5578, 504.411, -119.485, 449.579, -119.485, 385.973, -31.2028, 336.623)
-script = SubResource("GDScript_q0knx")
+
+[node name="TextureRect" type="TextureRect" parent="LevelBounds"]
+offset_right = 1154.0
+offset_bottom = 646.0
+texture = ExtResource("1_xfbpl")
+
+[node name="Destination" parent="." instance=ExtResource("5_786ap")]
+position = Vector2(882, 183)
+
+[node name="Spaceship" parent="." instance=ExtResource("2_3ina5")]
+position = Vector2(120, 424)
+slide_on_ceiling = false
+script = ExtResource("3_ywuom")

@@ -1,6 +1,6 @@
 extends CharacterBody2D
 
-const SPEED = 40.0
+const SPEED = 100.0
 const JUMP_VELOCITY = -400.0
 
 var relative_position = Vector2(0, 0)
@@ -11,7 +11,7 @@ var trajectory_distances: Array[float] = [0]
 var distance: float = 0
 
 func user_func(x: float) -> float:
-	var y = x * x / 100
+	var y = x
 	return y
 
 func _ready() -> void:

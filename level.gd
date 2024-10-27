@@ -1,6 +1,6 @@
 extends Node2D
-@onready var level_body: StaticBody2D = $StaticBody2D
-@onready var character_body: CharacterBody2D = $CharacterBody2D
+@onready var level_body: StaticBody2D = $LevelBounds
+@onready var character_body: CharacterBody2D = $Spaceship
 
 
 func _ready():
