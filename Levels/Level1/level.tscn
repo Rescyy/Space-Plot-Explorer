@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://117c7bcmbr1v" path="res://Levels/Level1/level_test.png" id="2_td05l"]
 [ext_resource type="PackedScene" uid="uid://cj6diom0xf8ik" path="res://Spaceship/spaceship.tscn" id="3_6lrvs"]
 [ext_resource type="Script" path="res://Spaceship/spaceship.gd" id="4_lougl"]
-[ext_resource type="Script" path="res://Input/Input.gd" id="5_f1j84"]
+[ext_resource type="PackedScene" uid="uid://b3tblhm2xwm5m" path="res://Input/input_container.tscn" id="5_tjhpd"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -28,19 +28,4 @@ position = Vector2(120, 424)
 slide_on_ceiling = false
 script = ExtResource("4_lougl")
 
-[node name="InputContainer" type="VBoxContainer" parent="Level"]
-z_index = 6
-offset_left = 485.0
-offset_top = 576.0
-offset_right = 624.0
-offset_bottom = 616.0
-scale = Vector2(4.34644, 1.69344)
-
-[node name="FunctionInput" type="LineEdit" parent="Level/InputContainer"]
-z_index = 6
-layout_mode = 2
-size_flags_vertical = 3
-script = ExtResource("5_f1j84")
-
-[connection signal="text_changed" from="Level/InputContainer/FunctionInput" to="Level/InputContainer/FunctionInput" method="_on_text_changed"]
-[connection signal="text_submitted" from="Level/InputContainer/FunctionInput" to="Level/InputContainer/FunctionInput" method="_on_text_submitted"]
+[node name="InputContainer" parent="Level" instance=ExtResource("5_tjhpd")]
