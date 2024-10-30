@@ -16,7 +16,7 @@ func _on_text_submitted(p_expr: String) -> void:
 	time_passed = 0.0
 	positions.clear()
 	var user_func_callable = Callable(self, "user_func")
-	Global.set_user_func(user_func_callable)
+	State.set_user_func(user_func_callable)
 
 func evaluate(command: String, variable_names: Array, variable_values: Array) -> float:
 	var expression = Expression.new()
@@ -36,15 +36,3 @@ func user_func(x_value: float) -> float:
 	if math_expr == "":
 		return 0.0
 	return evaluate(math_expr, ["x"], [x_value])
-
-func calculate_velocity():
-	var velocities = []
-	for i in range(1, positions.size()):
-		var prev = positions[i - 1]
-		var current = positions[i]
-		var delta_time = current["time"] - prev["time"]
-		if delta_time > 0:
-			var delta_position = current["position"] - prev["position"]
-			var velocity = delta_position / delta_time
-			velocities.append(velocity)
-	return velocities

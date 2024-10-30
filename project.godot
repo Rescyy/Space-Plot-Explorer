@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.3", "GL Compatibility")
 
 [autoload]
 
-Global="*res://Global/global.gd"
+State="*res://State/state.gd"
 
 [rendering]
 

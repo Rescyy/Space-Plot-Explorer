@@ -1,18 +1,19 @@
 extends Node2D
-@onready var level: StaticBody2D = $"."
-@onready var spaceship: CharacterBody2D = $Spaceship
 
+@onready var levelBounds: StaticBody2D = $"."
+@onready var spaceship: CharacterBody2D = $"StartPoint/Spaceship"
+@onready var winArea: StaticBody2D = $"WinArea";
 
 func _ready():
-	level.collision_mask = 1
-	spaceship.collision_layer = 1
+	pass
 
 func _process(delta):
-	if _is_game_lost():
-		print("Game lost")
-
-func _is_game_lost():
 	var collision_body: KinematicCollision2D = spaceship.move_and_collide(Vector2.ZERO, true)
 	if collision_body != null:
-		return true
-	return false
+		var collider = collision_body.get_collider()
+		if not State.is_lost() and collider == levelBounds:
+			print("Game lost")
+			State.set_lost()
+		elif not State.is_won() and collider == winArea:
+			print("Game won")
+			State.set_won()

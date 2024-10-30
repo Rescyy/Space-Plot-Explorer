@@ -9,6 +9,7 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Level" type="StaticBody2D" parent="."]
+collision_mask = 0
 script = ExtResource("1_ewo28")
 
 [node name="TextureRect" type="TextureRect" parent="Level"]
@@ -23,9 +24,20 @@ scale = Vector2(0.806041, 0.91394)
 build_mode = 1
 polygon = PackedVector2Array(131.684, 308.11, 344.307, 217.088, 519.628, 134.839, 707.382, 77.8127, 922.492, 48.203, 990.88, 154.579, 949.847, 262.051, 753.388, 319.077, 534.548, 369.523, 402.747, 448.482, 272.189, 472.608, 104.329, 529.635, -58.5578, 504.411, -119.485, 449.579, -119.485, 385.973, -31.2028, 336.623)
 
-[node name="Spaceship" parent="Level" instance=ExtResource("3_6lrvs")]
+[node name="InputContainer" parent="Level" instance=ExtResource("5_tjhpd")]
+offset_right = 1152.0
+offset_bottom = 626.0
+scale = Vector2(1, 1)
+
+[node name="WinArea" type="StaticBody2D" parent="Level"]
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level/WinArea"]
+polygon = PackedVector2Array(901, 89, 955, 183, 923, 283)
+
+[node name="StartPoint" type="Node2D" parent="Level"]
+
+[node name="Spaceship" parent="Level/StartPoint" instance=ExtResource("3_6lrvs")]
 position = Vector2(120, 424)
 slide_on_ceiling = false
 script = ExtResource("4_lougl")
-
-[node name="InputContainer" parent="Level" instance=ExtResource("5_tjhpd")]

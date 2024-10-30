@@ -1,5 +1,6 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3tblhm2xwm5m"]
+[gd_scene load_steps=3 format=3 uid="uid://b3tblhm2xwm5m"]
 
+[ext_resource type="FontVariation" uid="uid://bi8al1j70ixq1" path="res://monaspace.tres" id="1_4pklg"]
 [ext_resource type="Script" path="res://Input/Input.gd" id="1_mvmus"]
 
 [node name="InputContainer" type="VBoxContainer"]
@@ -14,6 +15,9 @@ scale = Vector2(4.34644, 1.69344)
 z_index = 6
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("1_4pklg")
+theme_override_font_sizes/font_size = 21
+placeholder_text = "Input Function"
 script = ExtResource("1_mvmus")
 
 [connection signal="text_changed" from="FunctionInput" to="FunctionInput" method="_on_text_changed"]

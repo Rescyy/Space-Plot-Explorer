@@ -1,0 +1,6 @@
+[gd_resource type="FontVariation" load_steps=2 format=3 uid="uid://bi8al1j70ixq1"]
+
+[ext_resource type="FontFile" uid="uid://c4o1d8s40yri3" path="res://Assets/Fonts/MonaspaceNeon-Medium.otf" id="1_bmv5p"]
+
+[resource]
+base_font = ExtResource("1_bmv5p")
