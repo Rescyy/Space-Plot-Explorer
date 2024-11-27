@@ -11,14 +11,21 @@ enum GameState {
 var prev_game_state: GameState = GameState.MAIN_MENU
 var game_state: GameState = GameState.MAIN_MENU
 var game_state_changed: bool = false
-var user_func: Callable
+var _user_func: Callable
 var has_user_func: bool = false
+var y0 = null
 
-func set_user_func(user_func: Callable):
+func set_user_func(_user_func: Callable):
 	if game_state == GameState.IDLE:
-		self.user_func = user_func
+		self._user_func = _user_func
 		has_user_func = true
+		self.y0 = _user_func.call(0)
 		game_state = GameState.FLYING
+
+func user_func(x):
+	if has_user_func:
+		return self._user_func.call(x) - self.y0
+	return null
 
 func set_idle():
 	game_state = GameState.IDLE

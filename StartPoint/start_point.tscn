@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://c1kjikt63pkos"]
+
+[ext_resource type="PackedScene" uid="uid://cj6diom0xf8ik" path="res://Spaceship/spaceship.tscn" id="1_bn1mh"]
+[ext_resource type="PackedScene" uid="uid://3fy57snabxs8" path="res://StartPoint/Graph/graph.tscn" id="1_nn4v0"]
+[ext_resource type="Script" path="res://Spaceship/spaceship.gd" id="2_2imfw"]
+
+[node name="StartPoint" type="Node2D"]
+
+[node name="Graph" parent="." instance=ExtResource("1_nn4v0")]
+visible = false
+
+[node name="Spaceship" parent="." instance=ExtResource("1_bn1mh")]
+position = Vector2(0, 0)
+slide_on_ceiling = false
+script = ExtResource("2_2imfw")

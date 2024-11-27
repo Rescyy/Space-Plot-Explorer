@@ -1,0 +1,319 @@
+[gd_scene load_steps=2 format=3 uid="uid://3fy57snabxs8"]
+
+[ext_resource type="FontVariation" uid="uid://bi8al1j70ixq1" path="res://monaspace.tres" id="1_3pl7t"]
+
+[node name="Graph" type="Node2D"]
+
+[node name="oy" type="Line2D" parent="."]
+position = Vector2(-148, -431)
+points = PackedVector2Array(148, -38, 148, 835)
+closed = true
+width = 1.0
+default_color = Color(0.666667, 0.666667, 0.666667, 0.501961)
+
+[node name="100" type="Node2D" parent="oy"]
+position = Vector2(148, 331)
+
+[node name="Line2D" type="Line2D" parent="oy/100"]
+points = PackedVector2Array(-5, 0, 5, 0)
+width = 1.0
+default_color = Color(0.666667, 0.666667, 0.666667, 0.501961)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="oy/100"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = -7.0
+offset_right = -8.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_3pl7t")
+text = "100"
+
+[node name="200" type="Node2D" parent="oy"]
+position = Vector2(148, 231)
+
+[node name="Line2D" type="Line2D" parent="oy/200"]
+points = PackedVector2Array(-5, 0, 5, 0)
+width = 1.0
+default_color = Color(0.666667, 0.666667, 0.666667, 0.501961)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="oy/200"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = -7.0
+offset_right = -8.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_3pl7t")
+text = "200"
+
+[node name="300" type="Node2D" parent="oy"]
+position = Vector2(148, 131)
+
+[node name="Line2D" type="Line2D" parent="oy/300"]
+points = PackedVector2Array(-5, 0, 5, 0)
+width = 1.0
+default_color = Color(0.666667, 0.666667, 0.666667, 0.501961)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="oy/300"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = -7.0
+offset_right = -8.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_3pl7t")
+text = "300"
+
+[node name="400" type="Node2D" parent="oy"]
+position = Vector2(148, 31)
+
+[node name="Line2D" type="Line2D" parent="oy/400"]
+points = PackedVector2Array(-5, 0, 5, 0)
+width = 1.0
+default_color = Color(0.666667, 0.666667, 0.666667, 0.501961)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="oy/400"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -38.0
+offset_top = -7.0
+offset_right = -8.0
+offset_bottom = 10.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_3pl7t")
+text = "400"
+
+[node name="ox" type="Line2D" parent="."]
+position = Vector2(-111, -427)
+points = PackedVector2Array(-219, 427, 1181, 427)
+closed = true
+width = 1.0
+default_color = Color(0.666667, 0.666667, 0.666667, 0.501961)
+
+[node name="100" type="Node2D" parent="ox"]
+position = Vector2(211, 427)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ox/100"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = 6.0
+offset_right = 15.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_3pl7t")
+text = "100"
+
+[node name="Line2D" type="Line2D" parent="ox/100"]
+points = PackedVector2Array(0, -5, 0, 5)
+width = 1.0
+default_color = Color(0.666667, 0.666667, 0.666667, 0.501961)
+
+[node name="200" type="Node2D" parent="ox"]
+position = Vector2(311, 427)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ox/200"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = 6.0
+offset_right = 15.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_3pl7t")
+text = "200"
+
+[node name="Line2D" type="Line2D" parent="ox/200"]
+points = PackedVector2Array(0, -5, 0, 5)
+width = 1.0
+default_color = Color(0.666667, 0.666667, 0.666667, 0.501961)
+
+[node name="300" type="Node2D" parent="ox"]
+position = Vector2(411, 427)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ox/300"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = 6.0
+offset_right = 15.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_3pl7t")
+text = "300"
+
+[node name="Line2D" type="Line2D" parent="ox/300"]
+points = PackedVector2Array(0, -5, 0, 5)
+width = 1.0
+default_color = Color(0.666667, 0.666667, 0.666667, 0.501961)
+
+[node name="400" type="Node2D" parent="ox"]
+position = Vector2(511, 427)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ox/400"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = 6.0
+offset_right = 15.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_3pl7t")
+text = "400"
+
+[node name="Line2D" type="Line2D" parent="ox/400"]
+points = PackedVector2Array(0, -5, 0, 5)
+width = 1.0
+default_color = Color(0.666667, 0.666667, 0.666667, 0.501961)
+
+[node name="500" type="Node2D" parent="ox"]
+position = Vector2(611, 427)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ox/500"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = 6.0
+offset_right = 15.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_3pl7t")
+text = "500"
+
+[node name="Line2D" type="Line2D" parent="ox/500"]
+points = PackedVector2Array(0, -5, 0, 5)
+width = 1.0
+default_color = Color(0.666667, 0.666667, 0.666667, 0.501961)
+
+[node name="600" type="Node2D" parent="ox"]
+position = Vector2(711, 427)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ox/600"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = 6.0
+offset_right = 15.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_3pl7t")
+theme_override_font_sizes/normal_font_size = 0
+text = "600"
+
+[node name="Line2D" type="Line2D" parent="ox/600"]
+points = PackedVector2Array(0, -5, 0, 5)
+width = 1.0
+default_color = Color(0.666667, 0.666667, 0.666667, 0.501961)
+
+[node name="700" type="Node2D" parent="ox"]
+position = Vector2(811, 427)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ox/700"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = 6.0
+offset_right = 15.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_3pl7t")
+text = "700"
+
+[node name="Line2D" type="Line2D" parent="ox/700"]
+points = PackedVector2Array(0, -5, 0, 5)
+width = 1.0
+default_color = Color(0.666667, 0.666667, 0.666667, 0.501961)
+
+[node name="800" type="Node2D" parent="ox"]
+position = Vector2(911, 427)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ox/800"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = 6.0
+offset_right = 15.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_3pl7t")
+text = "800"
+
+[node name="Line2D" type="Line2D" parent="ox/800"]
+points = PackedVector2Array(0, -5, 0, 5)
+width = 1.0
+default_color = Color(0.666667, 0.666667, 0.666667, 0.501961)
+
+[node name="900" type="Node2D" parent="ox"]
+position = Vector2(1012, 428)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ox/900"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -15.0
+offset_top = 6.0
+offset_right = 15.0
+offset_bottom = 23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/normal_font = ExtResource("1_3pl7t")
+text = "900"
+
+[node name="Line2D" type="Line2D" parent="ox/900"]
+points = PackedVector2Array(0, -5, 0, 5)
+width = 1.0
+default_color = Color(0.666667, 0.666667, 0.666667, 0.501961)

@@ -1,13 +1,23 @@
 extends CharacterBody2D
 
-const SPEED = 200.0
+@onready var winAreaShape: CollisionShape2D = $"../../WinArea/WinAreaShape"
+@onready var startPoint: Node2D = $".."
+
+const SPEED = 300.0
 
 var init_pos: Vector2
 var end_x = 1000
-var func_trajectory: Array[Vector2]
-var trajectory_distances: Array[float]
+var path: Array[Vector2]
+var arc_length: Array[float]
 var distance: float = 0
 var trajectory_calculated = false
+var prev_velocity: Vector2 = Vector2.ZERO
+
+var win_vars = false
+var win_position = null
+var win_time = null
+var win_rotation = null
+
 
 var callable_dict = {
 	State.GameState.FLYING: Callable(self, "start")
@@ -17,14 +27,34 @@ func _ready() -> void:
 	self.init_pos = position
 
 func compute_trajectory():
-	func_trajectory = [Vector2.ZERO]
-	trajectory_distances = [0]
+	path = [Vector2.ZERO]
+	arc_length = [0]
+	self.prev_velocity = Vector2.ZERO
 	var x: int = 0
 	while x < end_x:
 		x += 1
-		func_trajectory.append(Vector2(x, State.user_func.call(x)))
-		trajectory_distances.append(func_trajectory[x - 1].distance_to(func_trajectory[x - 2]) + trajectory_distances.back())
+		path.append(Vector2(x, State.user_func(x)))
+	for i in range(1, len(path)):
+		arc_length.append(path[i].distance_to(path[i - 1]) + arc_length.back())
+	
 	trajectory_calculated = true
+
+func rotation_from_vec(vec: Vector2) -> float:
+	return -Vector2(-vec.y, -vec.x).angle()
+
+func calculate_rotation_from_vec(next_position: Vector2, delta: float) -> float:
+	var _velocity = next_position - position
+	_velocity = _velocity.normalized() * delta
+	var delta_velocity = 1.1 * _velocity - prev_velocity
+	prev_velocity = _velocity
+	return rotation_from_vec(delta_velocity)
+
+func calculate_rotation_from_pos(next_position: Vector2, delta: float) -> float:
+	prev_velocity = next_position - position
+	return rotation_from_vec(prev_velocity)
+
+func ease_out(x: float) -> float:
+	return - (x-1)*(x-1) + 1
 
 func _physics_process(delta: float) -> void:
 	if State.is_flying():
@@ -32,20 +62,42 @@ func _physics_process(delta: float) -> void:
 			compute_trajectory()
 		var ds = delta * SPEED
 		distance += ds
-		var i = trajectory_distances.bsearch(distance)
-		var d1 = trajectory_distances[i-1]
-		var d2 = trajectory_distances[i]
+		var i = arc_length.bsearch(distance)
+		var d1 = arc_length[i-1]
+		var d2 = arc_length[i]
 		var t = (distance - d1) / (d2 - d1)
 		var x = i + t - 1
-		var y = State.user_func.call(x)
+		var y = State.user_func(x)
 		var new_position = self.init_pos + Vector2(x, -y)
-		var delta_position = new_position - position
-		rotation = -Vector2(-delta_position.y, -delta_position.x).angle()
+		rotation = calculate_rotation_from_vec(new_position, delta)
 		position = new_position
 	if State.is_lost():
-		distance = 0
-		trajectory_calculated = false
-		position = self.init_pos
-		State.set_idle()
+		reset()
 	if State.is_won():
-		pass
+		if not win_vars:
+			win_vars = true
+			win_position = position
+			win_time = delta
+			win_rotation = rotation
+			print(rotation)
+		if win_time >= 1.0:
+			State.set_idle()
+		var scale_factor = 1.0 - win_time
+		scale = Vector2(scale_factor, scale_factor*scale_factor)
+		var new_position = win_position.lerp(
+			winAreaShape.position - startPoint.position, 
+			ease_out(win_time)
+		)
+		rotation = lerp(win_rotation, 0.0, win_time)
+		position = new_position
+		win_time += delta
+
+func reset():
+	State.set_idle()
+	distance = 0
+	trajectory_calculated = false
+	position = self.init_pos
+	rotation = 0
+	scale = Vector2.ONE
+	prev_velocity = Vector2.ZERO
+	win_vars = false
