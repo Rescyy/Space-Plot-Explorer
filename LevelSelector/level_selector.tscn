@@ -1,6 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://cn81ne22twte6"]
+[gd_scene load_steps=10 format=3 uid="uid://cn81ne22twte6"]
 
-[ext_resource type="Texture2D" uid="uid://cb7hax47d1pj1" path="res://bckg.jpg" id="1_b6tf3"]
+[ext_resource type="Texture2D" uid="uid://cb7hax47d1pj1" path="res://MainMenu/bckg.jpg" id="1_b6tf3"]
+[ext_resource type="Script" path="res://LevelSelector/level_selector.gd" id="1_lbncj"]
+[ext_resource type="Texture2D" uid="uid://dyy5gq3r8nxk3" path="res://LevelSelector/lvl1.png" id="2_frqx2"]
+[ext_resource type="Texture2D" uid="uid://dxl1hj5tu1nul" path="res://LevelSelector/lvl2.png" id="3_luu8y"]
+[ext_resource type="Texture2D" uid="uid://bwi27m3qejunk" path="res://LevelSelector/lvl3.png" id="4_0fswn"]
+[ext_resource type="Texture2D" uid="uid://bi4q1c87b8n1r" path="res://LevelSelector/lvl4.png" id="5_jhh4t"]
+[ext_resource type="Texture2D" uid="uid://ddgmcbtq1isqs" path="res://LevelSelector/lvl5.png" id="6_p5vx1"]
+[ext_resource type="Texture2D" uid="uid://cxeeo4152bhkc" path="res://LevelSelector/lvl6.png" id="7_5ukq5"]
+[ext_resource type="Texture2D" uid="uid://d1klhxiqnmfm5" path="res://LevelSelector/lvl_p.png" id="8_f8p5q"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
@@ -9,16 +17,97 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_lbncj")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 2
+offset_left = -1.0
+offset_top = 4.0
+offset_right = 1151.0
+offset_bottom = 645.0
+texture = ExtResource("1_b6tf3")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_left = -1.0
-offset_top = 1.0
-offset_right = 1155.0
-offset_bottom = 645.0
+offset_left = 40.0
+offset_top = 37.0
+offset_right = 80.0
+offset_bottom = 77.0
 
-[node name="Background" type="TextureRect" parent="."]
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+icon = ExtResource("2_frqx2")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("1_b6tf3")
+offset_left = 40.0
+offset_top = 251.0
+offset_right = 219.0
+offset_bottom = 411.0
+
+[node name="Button" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+icon = ExtResource("3_luu8y")
+
+[node name="VBoxContainer3" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 41.0
+offset_top = 460.0
+offset_right = 219.0
+offset_bottom = 617.0
+
+[node name="Button" type="Button" parent="VBoxContainer3"]
+layout_mode = 2
+icon = ExtResource("4_0fswn")
+
+[node name="VBoxContainer4" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 294.0
+offset_top = 37.0
+offset_right = 471.0
+offset_bottom = 194.0
+
+[node name="Button" type="Button" parent="VBoxContainer4"]
+layout_mode = 2
+icon = ExtResource("5_jhh4t")
+
+[node name="VBoxContainer5" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 295.0
+offset_top = 251.0
+offset_right = 466.0
+offset_bottom = 401.0
+
+[node name="Button" type="Button" parent="VBoxContainer5"]
+layout_mode = 2
+icon = ExtResource("6_p5vx1")
+
+[node name="VBoxContainer6" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 299.0
+offset_top = 461.0
+offset_right = 469.0
+offset_bottom = 614.0
+
+[node name="Button" type="Button" parent="VBoxContainer6"]
+layout_mode = 2
+icon = ExtResource("7_5ukq5")
+
+[node name="VBoxContainer7" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_left = 745.0
+offset_top = 462.0
+offset_right = 1083.0
+offset_bottom = 612.0
+
+[node name="Button" type="Button" parent="VBoxContainer7"]
+layout_mode = 2
+icon = ExtResource("8_f8p5q")
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_play_button_pressed_lvl1"]
+[connection signal="pressed" from="VBoxContainer2/Button" to="." method="_on_play_button_pressed_lvl2"]
+[connection signal="pressed" from="VBoxContainer3/Button" to="." method="_on_play_button_pressed_lvl3"]
+[connection signal="pressed" from="VBoxContainer4/Button" to="." method="_on_play_button_pressed_lvl4"]
+[connection signal="pressed" from="VBoxContainer5/Button" to="." method="_on_play_button_pressed_lvl5"]
+[connection signal="pressed" from="VBoxContainer6/Button" to="." method="_on_play_button_pressed_lvl6"]
+[connection signal="pressed" from="VBoxContainer7/Button" to="." method="_on_play_button_pressed_procedural_lvl"]
