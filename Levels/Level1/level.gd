@@ -14,6 +14,7 @@ func _process(delta):
 		if not State.is_won() and not State.is_lost() and collider == levelBounds:
 			print("Game lost")
 			State.set_lost()
+			get_tree().change_scene_to_file("res://LevelSelector/level_selector.tscn")
 		elif not State.is_idle() and not State.is_won() and collider == winArea:
 			print("Game won")
 			State.set_won()
