@@ -11,10 +11,10 @@ func _draw():
 		var weight = i / 10.0
 		draw_circle(
 			Vector2.ZERO, 
-			lerp(45, 10, weight), 
+			lerp(45, 5, weight), 
 			Color.DIM_GRAY.lerp(Color.BLACK, weight),
 			false,
-			4.5
+			(45)/10
 		)
 	draw_circle(Vector2.ZERO, 47, Color.BLACK, false, 3)
 	draw_circle(Vector2.ZERO, 10, Color.BLACK)
