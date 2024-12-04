@@ -1,12 +1,12 @@
-extends CharacterBody2D
+class_name Spaceship extends CharacterBody2D
 
-@onready var winAreaShape: CollisionShape2D = $"../../WinArea/WinAreaShape"
+@onready var winArea: Node2D = $"../../WinArea"
 @onready var startPoint: Node2D = $".."
 
 const SPEED = 300.0
 
 var init_pos: Vector2
-var end_x = 1000
+var end_x = 1200
 var path: Array[Vector2]
 var arc_length: Array[float]
 var distance: float = 0
@@ -23,8 +23,11 @@ var callable_dict = {
 	State.GameState.FLYING: Callable(self, "start")
 }
 
+func _init(init_pos: Vector2=Vector2.ZERO):
+	self.init_pos = init_pos
+
 func _ready() -> void:
-	self.init_pos = position
+	pass
 
 func compute_trajectory():
 	path = [Vector2.ZERO]
@@ -57,12 +60,17 @@ func ease_out(x: float) -> float:
 	return - (x-1)*(x-1) + 1
 
 func _physics_process(delta: float) -> void:
-	if State.is_flying():
-		if not trajectory_calculated:
-			compute_trajectory()
+	if State.is_start():
+		reset()
+		compute_trajectory()
+		State.set_flying()
+	elif State.is_flying():
 		var ds = delta * SPEED
 		distance += ds
 		var i = arc_length.bsearch(distance)
+		if i > end_x:
+			State.set_lost()
+			return
 		var d1 = arc_length[i-1]
 		var d2 = arc_length[i]
 		var t = (distance - d1) / (d2 - d1)
@@ -71,9 +79,9 @@ func _physics_process(delta: float) -> void:
 		var new_position = self.init_pos + Vector2(x, -y)
 		rotation = calculate_rotation_from_vec(new_position, delta)
 		position = new_position
-	if State.is_lost():
+	elif State.is_lost():
 		reset()
-	if State.is_won():
+	elif State.is_won():
 		if not win_vars:
 			win_vars = true
 			win_position = position
@@ -85,7 +93,7 @@ func _physics_process(delta: float) -> void:
 		var scale_factor = 1.0 - win_time
 		scale = Vector2(scale_factor, scale_factor*scale_factor)
 		var new_position = win_position.lerp(
-			winAreaShape.position - startPoint.position, 
+			winArea.position - startPoint.position, 
 			ease_out(win_time)
 		)
 		rotation = lerp(win_rotation, 0.0, win_time)

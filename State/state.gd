@@ -3,6 +3,7 @@ extends Node
 enum GameState {
 	MAIN_MENU, 
 	IDLE, 
+	START,
 	FLYING,
 	LOST,
 	WON,
@@ -16,11 +17,11 @@ var has_user_func: bool = false
 var y0 = null
 
 func set_user_func(_user_func: Callable):
-	if game_state == GameState.IDLE:
+	if is_idle() or is_flying():
 		self._user_func = _user_func
 		has_user_func = true
 		self.y0 = _user_func.call(0)
-		game_state = GameState.FLYING
+		game_state = GameState.START
 
 func user_func(x):
 	if has_user_func:
@@ -36,6 +37,12 @@ func set_lost():
 func set_won():
 	game_state = GameState.WON
 
+func set_start():
+	game_state = GameState.START
+
+func set_flying():
+	game_state = GameState.FLYING
+
 func is_idle() -> bool:
 	return game_state == GameState.IDLE
 
@@ -47,6 +54,9 @@ func is_won() -> bool:
 
 func is_flying() -> bool:
 	return game_state == GameState.FLYING
+
+func is_start() -> bool:
+	return game_state == GameState.START
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

@@ -1,12 +1,13 @@
-[gd_scene load_steps=9 format=3 uid="uid://bgec2lm84272j"]
+[gd_scene load_steps=10 format=3 uid="uid://bgec2lm84272j"]
 
 [ext_resource type="Script" path="res://Levels/Level1/level.gd" id="1_ewo28"]
 [ext_resource type="Texture2D" uid="uid://117c7bcmbr1v" path="res://Levels/Level1/level_test.png" id="2_td05l"]
 [ext_resource type="PackedScene" uid="uid://c1kjikt63pkos" path="res://StartPoint/start_point.tscn" id="4_fqcf1"]
-[ext_resource type="Script" path="res://Levels/Level1/winAreaShape.gd" id="4_ukrxm"]
+[ext_resource type="Script" path="res://Levels/Level1/win_area.gd" id="4_ukrxm"]
 [ext_resource type="Script" path="res://Buttons/graphButton.gd" id="5_pinqp"]
 [ext_resource type="PackedScene" uid="uid://b3tblhm2xwm5m" path="res://Input/input_container.tscn" id="5_tjhpd"]
 [ext_resource type="Script" path="res://Buttons/resetButton.gd" id="7_278nt"]
+[ext_resource type="Script" path="res://Levels/Level1/back_button.gd" id="8_8d7kd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r40sn"]
 radius = 38.0526
@@ -35,12 +36,12 @@ offset_bottom = 626.0
 scale = Vector2(1, 1)
 
 [node name="WinArea" type="StaticBody2D" parent="Level"]
+position = Vector2(906, 190)
 collision_mask = 0
+script = ExtResource("4_ukrxm")
 
 [node name="WinAreaShape" type="CollisionShape2D" parent="Level/WinArea"]
-position = Vector2(925, 185)
 shape = SubResource("CircleShape2D_r40sn")
-script = ExtResource("4_ukrxm")
 
 [node name="StartPoint" parent="Level" instance=ExtResource("4_fqcf1")]
 position = Vector2(154, 428)
@@ -60,3 +61,11 @@ offset_right = 404.0
 offset_bottom = 628.0
 text = "Reset"
 script = ExtResource("7_278nt")
+
+[node name="BackButton" type="Button" parent="Level"]
+offset_left = 6.0
+offset_top = 5.0
+offset_right = 51.0
+offset_bottom = 36.0
+text = "Back"
+script = ExtResource("8_8d7kd")

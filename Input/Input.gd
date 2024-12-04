@@ -1,10 +1,6 @@
 extends Node
 
-var x = 0.0
-var y = 0.0
 var math_expr = ""
-var time_passed = 0.0
-var positions = []
 
 func _process(delta: float) -> void:
 	pass
@@ -12,9 +8,6 @@ func _process(delta: float) -> void:
 func _on_text_submitted(p_expr: String) -> void:
 	print("Submitted Expression: " + p_expr)
 	math_expr = p_expr
-	x = 0.0
-	time_passed = 0.0
-	positions.clear()
 	var user_func_callable = Callable(self, "user_func")
 	State.set_user_func(user_func_callable)
 
