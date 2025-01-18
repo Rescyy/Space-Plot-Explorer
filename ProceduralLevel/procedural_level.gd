@@ -16,7 +16,7 @@ var borderColor: Color
 func generate_level_colors():
 	var hue: float = randf_range(0.0, 1.0)
 	const saturation: float = 0.5
-	const backgroundValue: float = 0.8
+	const backgroundValue: float = 0.7
 	const caveValue: float = 0.6
 	const borderValue: float = 0.4
 	const dev = 0.05
@@ -72,7 +72,7 @@ func get_bezier_derivative(ps: Array) -> Callable:
 func bottom_point(point: Vector2, t: float, bezier_derivative: Callable) -> Vector2:
 	var derivative = bezier_derivative.call(t)
 	var dydx = derivative.y / derivative.x
-	var perpendicular_dist = -sign(dydx) / sqrt(1 + 1/(dydx*dydx))
+	var perpendicular_dist = -sign(dydx)
 	point.y += 50 
 	point.x += 50 * perpendicular_dist 
 	return point
@@ -80,7 +80,7 @@ func bottom_point(point: Vector2, t: float, bezier_derivative: Callable) -> Vect
 func top_point(point: Vector2, t: float, bezier_derivative: Callable) -> Vector2:
 	var derivative = bezier_derivative.call(t)
 	var dydx = derivative.y / derivative.x
-	var perpendicular_dist = sign(dydx) / sqrt(1 + 1/(dydx*dydx))
+	var perpendicular_dist = sign(dydx)
 	point.y += -50 
 	point.x += 50 * perpendicular_dist 
 	return point
@@ -201,11 +201,10 @@ func _ready() -> void:
 			elif len(bottomPoints) > 1:
 				bottomPoints.pop_back()
 
-	topPoints = topPoints.map(top_point_noise)
-	bottomPoints = bottomPoints.map(bottom_point_noise)
-
 	#topPoints.sort_custom(sortbyx)
 	#bottomPoints.sort_custom(sortbyx)
+	topPoints = topPoints.map(top_point_noise)
+	bottomPoints = bottomPoints.map(bottom_point_noise)
 
 	boundPolygon.append(firstPoint)
 	boundPolygon.append_array(topPoints)
@@ -217,7 +216,7 @@ func _ready() -> void:
 	win_area.position = (topPoints[-1] + bottomPoints[0] + lastPoint) / 3
 
 	before = boundPolygon.duplicate()
-	boundPolygon = smooth_polygon(boundPolygon, 0.1)
+	boundPolygon = smooth_polygon(boundPolygon, 0.2)
 	boundPolygon = make_space(boundPolygon, start_point.position)
 	boundPolygon = make_space(boundPolygon, win_area.position)
 
