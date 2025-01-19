@@ -38,7 +38,7 @@ theme_override_fonts/normal_font = ExtResource("3_pl8dh")
 theme_override_font_sizes/normal_font_size = 21
 text = "Fill In The Empty Variables 
 
-f(x)=       sin(       x)+       x"
+f(x) =       sin(       x)+       x"
 
 [node name="InputContainer" type="VBoxContainer" parent="Level/RichTextLabel"]
 layout_mode = 0
