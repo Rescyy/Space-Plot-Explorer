@@ -1,24 +1,23 @@
 [gd_scene load_steps=3 format=3 uid="uid://b3tblhm2xwm5m"]
 
-[ext_resource type="FontVariation" uid="uid://bi8al1j70ixq1" path="res://monaspace.tres" id="1_4pklg"]
-[ext_resource type="Script" path="res://Input/Input.gd" id="1_mvmus"]
+[ext_resource type="FontVariation" path="res://monaspace.tres" id="1_4pklg"]
+[ext_resource type="Script" path="res://Input/FuncInput.gd" id="1_mvmus"]
 
 [node name="InputContainer" type="VBoxContainer"]
 z_index = 6
 offset_left = 485.0
 offset_top = 576.0
-offset_right = 624.0
+offset_right = 545.0
 offset_bottom = 616.0
 scale = Vector2(4.34644, 1.69344)
 
-[node name="FunctionInput" type="LineEdit" parent="."]
+[node name="ValInput" type="LineEdit" parent="."]
 z_index = 6
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_fonts/font = ExtResource("1_4pklg")
 theme_override_font_sizes/font_size = 21
-placeholder_text = "Input Function"
 script = ExtResource("1_mvmus")
 
-[connection signal="text_changed" from="FunctionInput" to="FunctionInput" method="_on_text_changed"]
-[connection signal="text_submitted" from="FunctionInput" to="FunctionInput" method="_on_text_submitted"]
+[connection signal="text_changed" from="ValInput" to="ValInput" method="_on_text_changed"]
+[connection signal="text_submitted" from="ValInput" to="ValInput" method="_on_text_submitted"]

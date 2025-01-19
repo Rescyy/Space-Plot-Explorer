@@ -7,7 +7,7 @@ const SPEED = 300.0
 
 var init_pos: Vector2
 var end_x = 1200
-var path: Array[Vector2]
+var path: PackedVector2Array
 var arc_length: Array[float]
 var distance: float = 0
 var trajectory_calculated = false
@@ -18,11 +18,6 @@ var win_position = null
 var win_time = null
 var win_rotation = null
 
-
-var callable_dict = {
-	State.GameState.FLYING: Callable(self, "start")
-}
-
 func _init(init_pos: Vector2=Vector2.ZERO):
 	self.init_pos = init_pos
 
@@ -30,13 +25,9 @@ func _ready() -> void:
 	pass
 
 func compute_trajectory():
-	path = [Vector2.ZERO]
 	arc_length = [0]
 	self.prev_velocity = Vector2.ZERO
-	var x: int = 0
-	while x < end_x:
-		x += 1
-		path.append(Vector2(x, State.user_func(x)))
+	path = State.get_spaceship_path()
 	for i in range(1, len(path)):
 		arc_length.append(path[i].distance_to(path[i - 1]) + arc_length.back())
 	
@@ -68,14 +59,14 @@ func _physics_process(delta: float) -> void:
 		var ds = delta * SPEED
 		distance += ds
 		var i = arc_length.bsearch(distance)
-		if i > end_x:
+		if i > end_x or i > len(arc_length) - 1:
 			State.set_lost()
 			return
 		var d1 = arc_length[i-1]
 		var d2 = arc_length[i]
 		var t = (distance - d1) / (d2 - d1)
 		var x = i + t - 1
-		var y = State.user_func(x)
+		var y = State.call_spaceship_function(x)
 		var new_position = self.init_pos + Vector2(x, -y)
 		rotation = calculate_rotation_from_vec(new_position, delta)
 		position = new_position
@@ -87,7 +78,6 @@ func _physics_process(delta: float) -> void:
 			win_position = position
 			win_time = delta
 			win_rotation = rotation
-			print(rotation)
 		if win_time >= 1.0:
 			State.set_idle()
 		var scale_factor = 1.0 - win_time

@@ -1,13 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://bgec2lm84272j"]
+[gd_scene load_steps=12 format=3 uid="uid://bgec2lm84272j"]
 
 [ext_resource type="Script" path="res://Levels/Level1/level.gd" id="1_ewo28"]
 [ext_resource type="Texture2D" uid="uid://117c7bcmbr1v" path="res://Levels/Level1/level_test.png" id="2_td05l"]
 [ext_resource type="PackedScene" uid="uid://c1kjikt63pkos" path="res://StartPoint/start_point.tscn" id="4_fqcf1"]
-[ext_resource type="Script" path="res://Levels/Level1/win_area.gd" id="4_ukrxm"]
+[ext_resource type="Script" path="res://Levels/win_area.gd" id="4_ukrxm"]
 [ext_resource type="Script" path="res://Buttons/graphButton.gd" id="5_pinqp"]
-[ext_resource type="PackedScene" uid="uid://b3tblhm2xwm5m" path="res://Input/input_container.tscn" id="5_tjhpd"]
 [ext_resource type="Script" path="res://Buttons/resetButton.gd" id="7_278nt"]
-[ext_resource type="Script" path="res://Levels/Level1/back_button.gd" id="8_8d7kd"]
+[ext_resource type="Script" path="res://Levels/back_button.gd" id="8_8d7kd"]
+[ext_resource type="FontVariation" path="res://monaspace.tres" id="9_vqeug"]
+[ext_resource type="Script" path="res://Buttons/submitButton.gd" id="10_qumoq"]
+[ext_resource type="Script" path="res://Input/ValInput.gd" id="10_uas6l"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_r40sn"]
 radius = 38.0526
@@ -19,6 +21,7 @@ collision_mask = 0
 script = ExtResource("1_ewo28")
 
 [node name="LevelTexture" type="TextureRect" parent="Level"]
+z_index = -1
 offset_right = 1154.0
 offset_bottom = 646.0
 texture = ExtResource("2_td05l")
@@ -30,10 +33,16 @@ scale = Vector2(0.806041, 0.91394)
 build_mode = 1
 polygon = PackedVector2Array(131.684, 308.11, 344.307, 217.088, 519.628, 134.839, 707.382, 77.8127, 922.492, 48.203, 990.88, 154.579, 949.847, 262.051, 753.388, 319.077, 534.548, 369.523, 402.747, 448.482, 272.189, 472.608, 104.329, 529.635, -58.5578, 504.411, -119.485, 449.579, -119.485, 385.973, -31.2028, 336.623)
 
-[node name="InputContainer" parent="Level" instance=ExtResource("5_tjhpd")]
-offset_right = 1135.0
-offset_bottom = 626.0
-scale = Vector2(1, 1)
+[node name="RichTextLabel" type="RichTextLabel" parent="Level"]
+offset_left = 576.0
+offset_top = 532.0
+offset_right = 974.0
+offset_bottom = 629.0
+theme_override_fonts/normal_font = ExtResource("9_vqeug")
+theme_override_font_sizes/normal_font_size = 21
+text = "Fill In The Empty Variables 
+
+f(x) =         * x"
 
 [node name="WinArea" type="StaticBody2D" parent="Level"]
 position = Vector2(906, 190)
@@ -69,3 +78,30 @@ offset_right = 51.0
 offset_bottom = 36.0
 text = "Back"
 script = ExtResource("8_8d7kd")
+
+[node name="SubmitButton" type="Button" parent="Level"]
+offset_left = 1001.0
+offset_top = 571.0
+offset_right = 1100.0
+offset_bottom = 623.0
+theme_override_fonts/font = ExtResource("9_vqeug")
+theme_override_font_sizes/font_size = 21
+text = "Submit"
+script = ExtResource("10_qumoq")
+
+[node name="InputContainer" type="VBoxContainer" parent="Level"]
+offset_left = 666.0
+offset_top = 567.0
+offset_right = 753.0
+offset_bottom = 608.0
+
+[node name="ValInput" type="LineEdit" parent="Level/InputContainer"]
+z_index = 6
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("9_vqeug")
+theme_override_font_sizes/font_size = 21
+script = ExtResource("10_uas6l")
+
+[connection signal="text_changed" from="Level/InputContainer/ValInput" to="Level/InputContainer/ValInput" method="_on_text_changed"]
+[connection signal="text_submitted" from="Level/InputContainer/ValInput" to="Level/InputContainer/ValInput" method="_on_text_submitted"]

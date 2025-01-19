@@ -1,5 +1,12 @@
 extends Node2D
 
+@onready var start_point: Node2D = $StartPoint
+@onready var win_area: WinArea = $WinArea
+@onready var spaceship: CharacterBody2D = $"StartPoint/Spaceship"
+@onready var levelBounds: CollisionPolygon2D = $LevelBounds
+@onready var funcInput: FuncInput = $"InputContainer/FuncInput"
+@onready var submitButton: SubmitButton = $"SubmitButton"
+
 var rng = RandomNumberGenerator.new()
 var noiseObj = FastNoiseLite.new()
 var points = []
@@ -8,10 +15,11 @@ var before: PackedVector2Array = PackedVector2Array()
 var backgroundColor: Color
 var caveColor: Color
 var borderColor: Color
-@onready var start_point: Node2D = $StartPoint
-@onready var win_area: WinArea = $WinArea
-@onready var spaceship: CharacterBody2D = $"StartPoint/Spaceship"
-@onready var levelBounds: CollisionPolygon2D = $LevelBounds
+var graphColor: Color
+
+var body: StaticBody2D = StaticBody2D.new()
+var collision: CollisionPolygon2D = CollisionPolygon2D.new()
+var path: PackedVector2Array
 
 func generate_level_colors():
 	var hue: float = randf_range(0.0, 1.0)
@@ -34,6 +42,12 @@ func generate_level_colors():
 		fmod(hue + randf_range(-0.20, 0.20) + 1.0, 1.0),
 		saturation + randf_range(-dev,dev),
 		borderValue + randf_range(-dev,dev)
+	)
+	graphColor = caveColor.inverted()
+	graphColor = Color.from_hsv(
+		graphColor.h,
+		1,
+		1,
 	)
 
 func noise(x: float) -> float:
@@ -133,8 +147,51 @@ func smooth_polygon(polygon: Array, smooth_factor) -> Array:
 	polygon.pop_back()
 	return new_points
 
+func make_collider_box(pos1: Vector2, pos2: Vector2):
+	var minx = pos1.x - 1 
+	var maxx = pos2.x + 1 
+	var miny = minf(pos1.y, pos2.y) - 1
+	var maxy = maxf(pos1.y, pos2.y) + 1
+	var box = [Vector2(minx, miny), Vector2(maxx, miny), Vector2(maxx, maxy), Vector2(minx, maxy)]
+	return PackedVector2Array(box)
+
+func make_path_from_values():
+	body.position = start_point.position
+	spaceship.reset()
+	path.clear()
+	body.collision_layer = 1
+	body.collision_mask = 1
+	if len(funcInput.text) != 0 and funcInput.function_valid:
+		var function = funcInput.function
+		var prevPos = Vector2.ZERO
+		path.append(start_point.position)
+		var x = 1
+		while x < 1000:
+			var y = function.call(x)
+			var pos = Vector2(x, -y)
+			var box = make_collider_box(prevPos, pos)
+			prevPos = pos
+			collision.polygon = box
+			var collision_body = body.move_and_collide(Vector2.ZERO, true)
+			path.append(pos + start_point.position)
+			if collision_body != null and collision_body.get_collider() != spaceship:
+				break
+			x += 1
+	body.collision_layer = 0
+	body.collision_mask = 0
+
+func submit():
+	if len(path) != 0 and len(funcInput.text) != 0 and funcInput.function_valid:
+		State.set_spaceship_path(path, funcInput.function)
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	body.add_child(collision)
+	add_child(body)
+	funcInput.set_text_changed_callback(make_path_from_values)
+	funcInput.set_text_submitted_callback(submit)
+	submitButton.set_on_pressed_callback(submit)
+	
 	const top = 50
 	const bottom = 100
 	const left = 75
@@ -227,12 +284,8 @@ func _draw():
 	draw_rect(get_viewport_rect(), backgroundColor)
 	draw_colored_polygon(boundPolygon, caveColor)
 	draw_polyline(boundPolygon, borderColor, 4)
-	#draw_polyline(before, Color.RED, 2)
-	#for circle in before:
-		#draw_circle(circle, 5, Color.RED)
-	#draw_polyline(boundPolygon, Color.BLUE, 2)
-	#for circle in boundPolygon:
-		#draw_circle(circle, 5, Color.BLUE)
+	if len(path) > 1:
+		draw_polyline(path, graphColor, 1.5)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

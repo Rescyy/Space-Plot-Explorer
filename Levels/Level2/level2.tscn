@@ -1,0 +1,121 @@
+[gd_scene load_steps=10 format=3 uid="uid://d1tv6yfc6ox3h"]
+
+[ext_resource type="Script" path="res://Levels/Level2/level2.gd" id="1_i2srt"]
+[ext_resource type="Texture2D" uid="uid://dkqh5jv118con" path="res://Levels/Level2/level2.png" id="2_j3qha"]
+[ext_resource type="FontVariation" path="res://monaspace.tres" id="3_oknau"]
+[ext_resource type="PackedScene" uid="uid://c1kjikt63pkos" path="res://StartPoint/start_point.tscn" id="4_1e3fs"]
+[ext_resource type="Script" path="res://Buttons/graphButton.gd" id="5_rf07j"]
+[ext_resource type="Script" path="res://Buttons/resetButton.gd" id="6_5q25n"]
+[ext_resource type="Script" path="res://Levels/back_button.gd" id="7_f33lh"]
+[ext_resource type="Script" path="res://Buttons/submitButton.gd" id="8_6bkv3"]
+[ext_resource type="Script" path="res://Input/ValInput.gd" id="9_csrkh"]
+
+[node name="Level2" type="Node2D"]
+
+[node name="Level" type="StaticBody2D" parent="."]
+collision_mask = 0
+script = ExtResource("1_i2srt")
+
+[node name="LevelTexture" type="TextureRect" parent="Level"]
+z_index = -1
+offset_right = 1154.0
+offset_bottom = 646.0
+texture = ExtResource("2_j3qha")
+
+[node name="LevelBounds" type="CollisionPolygon2D" parent="Level"]
+physics_interpolation_mode = 1
+position = Vector2(159.81, 42.9454)
+scale = Vector2(0.806041, 0.91394)
+build_mode = 1
+polygon = PackedVector2Array(77.1549, 50.3913, 113.133, 128.077, 190.052, 213.422, 230.993, 297.672, 248.362, 303.143, 281.859, 345.816, 304.19, 327.215, 348.853, 304.237, 367.463, 330.497, 383.591, 305.331, 408.404, 303.143, 415.847, 338.156, 440.66, 314.085, 459.269, 350.192, 484.082, 327.215, 492.767, 337.062, 498.73, 336.651, 498.97, 316.273, 515.098, 303.143, 512.617, 281.26, 578.37, 217.798, 580.851, 251.717, 589.536, 252.812, 623.033, 177.314, 692.508, 102.911, 817.812, 70.0862, 943.116, 96.3461, 914.581, 197.009, 917.063, 201.386, 876.122, 274.695, 832.7, 246.247, 826.496, 248.435, 799.203, 325.026, 694.99, 437.725, 572.167, 515.411, 553.557, 514.317, 513.857, 462.891, 479.12, 492.433, 458.029, 462.891, 433.216, 502.281, 413.366, 477.115, 389.794, 496.81, 371.185, 501.187, 351.335, 465.079, 326.522, 497.904, 316.597, 501.187, 293.025, 471.644, 283.1, 465.079, 252.084, 495.716, 227.271, 504.469, 150.352, 478.209, 58.5454, 392.865, 30.0109, 297.672, -63.0365, 212.327, -85.3679, 113.853, -38.2239, 41.638)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Level"]
+offset_left = 573.0
+offset_top = 543.0
+offset_right = 943.0
+offset_bottom = 640.0
+theme_override_fonts/normal_font = ExtResource("3_oknau")
+theme_override_font_sizes/normal_font_size = 21
+text = "Fill In The Empty Variables 
+
+f(x) =        x^2+        x"
+
+[node name="InputContainer" type="VBoxContainer" parent="Level/RichTextLabel"]
+layout_mode = 0
+offset_left = 86.0
+offset_top = 35.0
+offset_right = 173.0
+offset_bottom = 76.0
+
+[node name="ValInput" type="LineEdit" parent="Level/RichTextLabel/InputContainer"]
+z_index = 6
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_oknau")
+theme_override_font_sizes/font_size = 21
+script = ExtResource("9_csrkh")
+
+[node name="InputContainer2" type="VBoxContainer" parent="Level/RichTextLabel"]
+layout_mode = 0
+offset_left = 239.0
+offset_top = 36.0
+offset_right = 326.0
+offset_bottom = 77.0
+
+[node name="ValInput" type="LineEdit" parent="Level/RichTextLabel/InputContainer2"]
+z_index = 6
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_fonts/font = ExtResource("3_oknau")
+theme_override_font_sizes/font_size = 21
+script = ExtResource("9_csrkh")
+
+[node name="WinArea" type="StaticBody2D" parent="Level"]
+position = Vector2(852, 173)
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Level/WinArea"]
+position = Vector2(-1, 19)
+polygon = PackedVector2Array(5, 7, 36, -27, 40, -52, -12, -44, -25, -26, -28, -15, -19, 6)
+
+[node name="StartPoint" parent="Level" instance=ExtResource("4_1e3fs")]
+position = Vector2(172, 165)
+
+[node name="GraphButton" type="Button" parent="Level"]
+offset_left = 419.0
+offset_top = 576.0
+offset_right = 475.0
+offset_bottom = 628.0
+text = "Graph"
+script = ExtResource("5_rf07j")
+
+[node name="ResetButton" type="Button" parent="Level"]
+offset_left = 353.0
+offset_top = 576.0
+offset_right = 404.0
+offset_bottom = 628.0
+text = "Reset"
+script = ExtResource("6_5q25n")
+
+[node name="BackButton" type="Button" parent="Level"]
+offset_left = 6.0
+offset_top = 5.0
+offset_right = 51.0
+offset_bottom = 36.0
+text = "Back"
+script = ExtResource("7_f33lh")
+
+[node name="SubmitButton" type="Button" parent="Level"]
+offset_left = 1001.0
+offset_top = 571.0
+offset_right = 1100.0
+offset_bottom = 623.0
+theme_override_fonts/font = ExtResource("3_oknau")
+theme_override_font_sizes/font_size = 21
+text = "Submit"
+script = ExtResource("8_6bkv3")
+
+[connection signal="text_changed" from="Level/RichTextLabel/InputContainer/ValInput" to="Level/RichTextLabel/InputContainer/ValInput" method="_on_text_changed"]
+[connection signal="text_submitted" from="Level/RichTextLabel/InputContainer/ValInput" to="Level/RichTextLabel/InputContainer/ValInput" method="_on_text_submitted"]
+[connection signal="text_changed" from="Level/RichTextLabel/InputContainer2/ValInput" to="Level/RichTextLabel/InputContainer2/ValInput" method="_on_text_changed"]
+[connection signal="text_submitted" from="Level/RichTextLabel/InputContainer2/ValInput" to="Level/RichTextLabel/InputContainer2/ValInput" method="_on_text_submitted"]

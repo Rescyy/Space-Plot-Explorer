@@ -3,7 +3,9 @@ extends Node2D
 @onready var levelBounds: StaticBody2D = $"."
 @onready var spaceship: Spaceship = $"StartPoint/Spaceship"
 @onready var winArea: StaticBody2D = $"WinArea"
-@onready var aVal: ValInput = $"InputContainer/ValInput"
+@onready var valInput: ValInput = $RichTextLabel/InputContainer/ValInput
+@onready var valInput2: ValInput = $RichTextLabel/InputContainer2/ValInput
+
 @onready var startPoint: Node2D = $"StartPoint"
 @onready var submitButton: SubmitButton = $"SubmitButton"
 
@@ -19,18 +21,25 @@ func make_collider_box(pos1: Vector2, pos2: Vector2):
 	var box = [Vector2(minx, miny), Vector2(maxx, miny), Vector2(maxx, maxy), Vector2(minx, maxy)]
 	return PackedVector2Array(box)
 
+func inputs_are_valid() -> bool:
+	return len(valInput.text) != 0 and len(valInput2.text)
+
+func level_function(x, a, b) -> float:
+	return (a * x + b) * x
+
 func make_path_from_values():
 	spaceship.reset()
 	path.clear()
 	body.collision_layer = 1
 	body.collision_mask = 1
-	if len(aVal.text) != 0:
-		var a = float(aVal.text)
+	if inputs_are_valid():
+		var a = float(valInput.text)
+		var b = float(valInput2.text)
 		var prevPos = Vector2.ZERO
 		path.append(startPoint.position)
 		var x = 1
 		while x < 1000:
-			var y = a * x
+			var y = level_function(x, a, b)
 			var pos = Vector2(x, -y)
 			var box = make_collider_box(prevPos, pos)
 			prevPos = pos
@@ -44,18 +53,21 @@ func make_path_from_values():
 	body.collision_mask = 0
 
 func submit():
-	if len(path) != 0 and len(aVal.text) != 0:
-		var a = float(aVal.text)
+	if len(path) != 0 and inputs_are_valid():
+		var a = float(valInput.text)
+		var b = float(valInput2.text)
 		var spaceship_function = func (x):
-			return a * x
+			return level_function(x, a, b)
 		State.set_spaceship_path(path, spaceship_function)
 
 func _ready():
 	body.position = startPoint.position
 	body.add_child(collision)
 	add_child(body)
-	aVal.set_text_changed_callback(make_path_from_values)
-	aVal.set_text_submitted_callback(submit)
+	valInput.set_text_changed_callback(make_path_from_values)
+	valInput2.set_text_changed_callback(make_path_from_values)
+	valInput.set_text_submitted_callback(submit)
+	valInput2.set_text_submitted_callback(submit)
 	submitButton.set_on_pressed_callback(submit)
 
 func _process(delta):

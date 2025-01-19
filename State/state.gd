@@ -12,21 +12,20 @@ enum GameState {
 var prev_game_state: GameState = GameState.MAIN_MENU
 var game_state: GameState = GameState.MAIN_MENU
 var game_state_changed: bool = false
-var _user_func: Callable
-var has_user_func: bool = false
-var y0 = null
+var spaceship_path: PackedVector2Array
+var spaceship_function: Callable
 
-func set_user_func(_user_func: Callable):
+func set_spaceship_path(path: PackedVector2Array, function: Callable):
 	if is_idle() or is_flying():
-		self._user_func = _user_func
-		has_user_func = true
-		self.y0 = _user_func.call(0)
+		self.spaceship_path = path
+		self.spaceship_function = function
 		game_state = GameState.START
 
-func user_func(x):
-	if has_user_func:
-		return self._user_func.call(x) - self.y0
-	return null
+func get_spaceship_path() -> PackedVector2Array:
+	return self.spaceship_path
+
+func call_spaceship_function(x) -> float:
+	return spaceship_function.call(x)
 
 func set_idle():
 	game_state = GameState.IDLE
@@ -64,7 +63,4 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	game_state_changed = game_state != prev_game_state
-	if game_state_changed:
-		print("Game State Changed")
-	prev_game_state = game_state
+	pass
