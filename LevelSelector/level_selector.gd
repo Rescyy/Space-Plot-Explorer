@@ -10,8 +10,7 @@ func _on_play_button_pressed_lvl2() -> void:
 	get_tree().change_scene_to_file("res://Levels/Level2/level2.tscn")
 
 func _on_play_button_pressed_lvl3() -> void:
-	pass
-	#get_tree().change_scene_to_file("res://Levels/Level1/level.tscn")
+	get_tree().change_scene_to_file("res://Levels/Level3/level3.tscn")
 
 func _on_play_button_pressed_lvl4() -> void:
 	pass
